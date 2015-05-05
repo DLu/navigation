@@ -2,6 +2,28 @@
 Changelog for package costmap_2d
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.11.16 (2015-04-30)
+--------------------
+* update maintainer email
+* Contributors: Michael Ferguson
+
+1.11.15 (2015-02-03)
+--------------------
+* Add ARCHIVE_DESTINATION for static builds
+* Contributors: Gary Servin
+
+1.11.14 (2014-12-05)
+--------------------
+* added waitForTransform to bufferCloud to solve extrapolation into the future exception
+* deallocate costmap_ before reallocating
+* prevent div by zero in raytraceLine
+* only prefix sensor_frame when it's not empty
+* tf_prefix support in obstacle_layer
+* remove undefined function updateUsingPlugins
+* remove unused cell_data.h
+* numerous style fixes
+* Contributors: Andrzej Pronobis, David Lu, Jeremie Deray, Mani Monajjemi, Michael Ferguson, enriquefernandez
+
 1.11.13 (2014-10-02)
 --------------------
 

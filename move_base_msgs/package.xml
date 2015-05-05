@@ -1,6 +1,6 @@
 <package>
     <name>move_base_msgs</name>
-    <version>1.11.13</version>
+    <version>1.11.16</version>
     <description>
 
         Holds the action description and relevant messages for the move_base package
@@ -9,7 +9,7 @@
     <author>Eitan Marder-Eppstein</author>
     <author>contradict@gmail.com</author>
     <maintainer email="davidvlu@gmail.com">David V. Lu!!</maintainer>
-    <maintainer email="fergs@unboundedrobotics.com">Michael Ferguson</maintainer>
+    <maintainer email="mferguson@fetchrobotics.com">Michael Ferguson</maintainer>
     <license>BSD</license>
     <url>http://wiki.ros.org/move_base_msgs</url>
 

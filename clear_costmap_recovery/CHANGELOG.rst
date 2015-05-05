@@ -2,6 +2,19 @@
 Changelog for package clear_costmap_recovery
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.11.16 (2015-04-30)
+--------------------
+* update maintainer email
+* Contributors: Michael Ferguson
+
+1.11.15 (2015-02-03)
+--------------------
+* Add ARCHIVE_DESTINATION for static builds
+* Contributors: Gary Servin
+
+1.11.14 (2014-12-05)
+--------------------
+
 1.11.13 (2014-10-02)
 --------------------
 * Fix the build (layers library is exported by costmap_2d)
