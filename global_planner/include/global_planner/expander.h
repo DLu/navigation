@@ -81,12 +81,24 @@ class Expander {
                 int n = startCell+i+nx_*j;
                 if(potential[n]<POT_HIGH)
                     continue;
-                float c = costs[n]+neutral_cost_;
+                float c = getCost(costs, n);
                 float pot = p_calc_->calculatePotential(potential, c, n);
                 potential[n] = pot;
             }
             }
         }
+        
+        float getCost(unsigned char* costs, int n) {
+            float c = costs[n];
+            if (c < lethal_cost_ - 1 || (unknown_ && c==costmap_2d::NO_INFORMATION)) {
+                c = c * factor_ + neutral_cost_;
+                if (c >= lethal_cost_)
+                    c = lethal_cost_ - 1;
+                return c;
+            }
+            return lethal_cost_;
+        }
+
 
     protected:
         inline int toIndex(int x, int y) {
