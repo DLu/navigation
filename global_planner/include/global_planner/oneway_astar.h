@@ -32,42 +32,25 @@
  *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  *
- * Author: Eitan Marder-Eppstein
- *         David V. Lu!!
+ * Author: David V. Lu!!
  *********************************************************************/
-#ifndef _ASTAR_H
-#define _ASTAR_H
+#ifndef _ONEWAY_ASTAR_H
+#define _ONEWAY_ASTAR_H
 
-#include <global_planner/planner_core.h>
-#include <global_planner/expander.h>
-#include <vector>
-#include <algorithm>
+#include <global_planner/astar.h>
 
 namespace global_planner {
-class Index {
-    public:
-        Index(int a, float b) {
-            i = a;
-            cost = b;
-        }
-        int i;
-        float cost;
-};
 
-struct greater1 {
-        bool operator()(const Index& a, const Index& b) const {
-            return a.cost > b.cost;
-        }
-};
-
-class AStarExpansion : public Expander {
+class OneWayAStar : public AStarExpansion {
     public:
-        AStarExpansion(PotentialCalculator* p_calc, int nx, int ny);
+        OneWayAStar(PotentialCalculator* p_calc, int nx, int ny);
         bool calculatePotentials(unsigned char* costs, double start_x, double start_y, double end_x, double end_y, int cycles,
                                 float* potential);
-    protected:
-        void add(unsigned char* costs, float* potential, float prev_potential, int next_i, int end_x, int end_y);
-        std::vector<Index> queue_;
+    private:
+        void incomingMap(const nav_msgs::OccupancyGridConstPtr& new_map);
+        ros::Subscriber map_sub_;
+        bool got_map_;
+        nav_msgs::OccupancyGrid grid_;
 };
 
 } //end namespace global_planner

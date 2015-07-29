@@ -43,6 +43,7 @@
 
 #include <global_planner/dijkstra.h>
 #include <global_planner/astar.h>
+#include <global_planner/oneway_astar.h>
 #include <global_planner/grid_path.h>
 #include <global_planner/gradient_path.h>
 #include <global_planner/quadratic_calculator.h>
@@ -122,8 +123,15 @@ void GlobalPlanner::initialize(std::string name, costmap_2d::Costmap2D* costmap,
                 de->setPreciseStart(true);
             planner_ = de;
         }
-        else
-            planner_ = new AStarExpansion(p_calc_, cx, cy);
+        else {
+            bool one_way;
+            private_nh.param("oneway", one_way, false);
+            if(one_way){
+                planner_ = new OneWayAStar(p_calc_, cx, cy);
+            }else{
+                planner_ = new AStarExpansion(p_calc_, cx, cy);
+            }
+        }    
 
         bool use_grid_path;
         private_nh.param("use_grid_path", use_grid_path, false);
