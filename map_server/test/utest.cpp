@@ -142,6 +142,32 @@ TEST(MapServer, testMapMode)
   }
 }
 
+TEST(MapServer, testLegacyTrinaryFlag)
+{
+  // Test Legacy Version of loadMapFromFile, see issue #474
+  nav_msgs::GetMap::Response map_resp;
+  double origin[3] = { 0.0, 0.0, 0.0 };
+
+  // True should be the same as TRINARY
+  map_server::loadMapFromFile(&map_resp, g_spectrum_png_file, 0.1, false, 0.65, 0.1, origin, true);
+  std::vector<unsigned int> trinary_counts = countValues(map_resp);
+  EXPECT_EQ(90u, trinary_counts[100]);
+  EXPECT_EQ(26u, trinary_counts[0]);
+  EXPECT_EQ(140u, trinary_counts[255]);
+
+  // False should be the same as SCALE
+  map_server::loadMapFromFile(&map_resp, g_spectrum_png_file, 0.1, false, 0.65, 0.1, origin, false);
+  std::vector<unsigned int> scale_counts = countValues(map_resp);
+  EXPECT_EQ(90u, scale_counts[100]);
+  EXPECT_EQ(26u, scale_counts[0]);
+  unsigned int scaled_values = 0;
+  for (unsigned int i = 1; i < 100; i++)
+  {
+    scaled_values += scale_counts[i];
+  }
+  EXPECT_EQ(140u, scaled_values);
+}
+
 int main(int argc, char **argv)
 {
   testing::InitGoogleTest(&argc, argv);
