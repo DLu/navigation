@@ -136,8 +136,10 @@ namespace base_local_planner {
     //if the cell is in an obstacle the path is invalid
     if(cost == NO_INFORMATION)
       return -2;
-    if(cost == LETHAL_OBSTACLE)
+    else if(cost == LETHAL_OBSTACLE)
       return -1;
+    else if(cost == INSCRIBED_INFLATED_OBSTACLE)
+      return -3;
 
     return cost;
   }
